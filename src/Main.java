@@ -18,9 +18,9 @@ public class Main {
         Calculator calculator = new Calculator(alloys);
         Trainer trainer = new Trainer();
        // trainer.writeTenPop();
-        System.out.println("Trained");
-        trainer.writeTopPop(trainer.getPop());
         System.out.println("Untrained");
-        trainer.writeTopPop(trainer.getComparePop());
+        trainer.writeTopPop(trainer.getOrignalPop());
+        System.out.println("Trained");
+        trainer.writeTopPop(trainer.getTrainedPop());
     }
 }

@@ -13,6 +13,8 @@ public class Unit {
         Create();
         calculator = new Calculator(alloys);
     }
+
+
     private void Create()
     {
         Adamantium.create(createArray[0]);
