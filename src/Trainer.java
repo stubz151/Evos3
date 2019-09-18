@@ -10,7 +10,7 @@ public class Trainer {
     ArrayList<Unit> trainedPop;
     private Random random;
     private double mutationChance=0.4;
-    private double mutationMag = 2;
+    private double mutationMag = 0.7;
     private Double[] badArr = new Double[4];
     public Trainer() {
         random = new Random();
@@ -33,7 +33,7 @@ public class Trainer {
         Unit maxNum1 = getPop((ArrayList<Unit>) orignalPop.clone(),0);
         Unit maxNum2 = getPop((ArrayList<Unit>) orignalPop.clone(),1);
         ArrayList<Unit> workingPop = genNextPop(orignalPop,maxNum1,maxNum2);
-        for (int i= 0 ; i < 100 ; i++)
+        for (int i= 0 ; i < 1000 ; i++)
         {
             workingPop = genNextPop(workingPop, maxNum1, maxNum2);
         }
@@ -52,29 +52,27 @@ public class Trainer {
             //maxNum1 is highest, maxNum2 is 2nd.
             Unit maxNum1 = new Unit(badArr);
             Unit maxNum2 = new Unit(badArr);
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 10; i++) {
+                int nextnum = (random.nextInt(pop.size() - 1));
+                double result =pop.get(nextnum).getProfit();
+                    if (result>maxNum1.getProfit())
+                    {
+                        maxNum1= pop.get(nextnum);
+                    }
+                }
+            for (int i = 0; i < 10; i++) {
                 int nextnum = (random.nextInt(pop.size() - 1));
                 double result =pop.get(nextnum).getProfit();
                 if (result>maxNum2.getProfit())
                 {
-                    if (result>maxNum1.getProfit())
-                    {
-                        maxNum2=maxNum1;
-                        maxNum1= pop.get(nextnum);
-                    }
-                    else
-                    {
-                        maxNum2=pop.get(nextnum);
-                    }
+                    maxNum2= pop.get(nextnum);
                 }
             }
             Unit crossUnit = Crossover(maxNum1, maxNum2);
             newPop.add(Mutate((crossUnit)));
-        }
+            }
         return newPop;
     }
-
-
 
     public Unit Crossover(Unit unit1, Unit unit2)
     {

@@ -28,10 +28,10 @@ public class Calculator {
         double elec=0;
         for (Alloy alloy : alloys)
         {
-        plat = plat + alloy.getPlat();
-        iron = iron + alloy.getIron();
-        copper = copper + alloy.getCopper();
-        elec = elec + alloy.getElec();
+            plat = plat + alloy.getPlat();
+            iron = iron + alloy.getIron();
+            copper = copper + alloy.getCopper();
+            elec = elec + alloy.getElec();
         }
         plat = plat/10;
         iron = iron/10;
@@ -41,8 +41,7 @@ public class Calculator {
         {
             iron =0;
         }
-        double platMoney =  plat*1200.00;
-        platMoney = platMoney + 10*((int)plat);
+        double platMoney =  (10*((int)plat) +1200)*plat;
         double ironMoney =  iron* 300.00;
         double copperMoney =  copper * 800.00;
         if (copper>8)

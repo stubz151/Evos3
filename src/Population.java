@@ -8,7 +8,6 @@ public class Population {
     public double numPandemonium;
     public Random random;
 
-
     public ArrayList<Unit> genPop(int size)
     {
         random = new Random();
