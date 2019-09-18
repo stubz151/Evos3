@@ -1,3 +1,5 @@
+import org.jfree.chart.JFreeChart;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -8,5 +10,7 @@ public class Main {
         trainer.writeTopPop(trainer.getOrignalPop());
         System.out.println("Trained");
         trainer.writeTopPop(trainer.getTrainedPop());
+
+
     }
 }

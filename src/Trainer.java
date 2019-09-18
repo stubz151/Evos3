@@ -10,7 +10,7 @@ public class Trainer {
     ArrayList<Unit> trainedPop;
     private Random random;
     private double mutationChance=0.4;
-    private double mutationMag = 0.7;
+    private double mutationMag = 2.0;
     private Double[] badArr = new Double[4];
     public Trainer() {
         random = new Random();
@@ -22,7 +22,7 @@ public class Trainer {
         badArr[i] =999.00;
         badArr[i] =999.00;
         }
-        orignalPop = new Population().genPop(100);
+        orignalPop = new Population().genPop(1000);
         Train();
 
     }
@@ -33,11 +33,26 @@ public class Trainer {
         Unit maxNum1 = getPop((ArrayList<Unit>) orignalPop.clone(),0);
         Unit maxNum2 = getPop((ArrayList<Unit>) orignalPop.clone(),1);
         ArrayList<Unit> workingPop = genNextPop(orignalPop,maxNum1,maxNum2);
-        for (int i= 0 ; i < 1000 ; i++)
+        double checkResult = maxNum1.getProfit();
+        int countNoImprove =0;
+        int iterations =1000;
+        Grapher grapher = new Grapher();
+        for (int i= 0 ; i < iterations ; i++)
         {
+            grapher.fitSeries.add(i, checkResult);
+            checkResult = getPop(workingPop , 0).getProfit();
             workingPop = genNextPop(workingPop, maxNum1, maxNum2);
+            if (checkResult-getPop(workingPop , 0).getProfit() <0)
+            {
+                if (countNoImprove>5)
+                {
+                    i=iterations;
+                }
+            }
+            countNoImprove =0;
         }
         trainedPop = workingPop;
+        grapher.setVisible(true);
     }
 
     public ArrayList<Unit> getTrainedPop() {
